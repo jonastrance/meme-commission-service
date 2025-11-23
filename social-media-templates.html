@@ -253,18 +253,51 @@
             const templateBox = button.previousElementSibling;
             const text = templateBox.innerText;
             
-            navigator.clipboard.writeText(text).then(function() {
-                const originalText = button.textContent;
-                button.textContent = '✅ Copied!';
-                button.style.backgroundColor = '#10b981';
-                
-                setTimeout(function() {
-                    button.textContent = originalText;
-                    button.style.backgroundColor = '';
-                }, 2000);
-            }).catch(function(err) {
-                alert('Failed to copy: ' + err);
-            });
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showCopySuccess(button);
+                }).catch(function(err) {
+                    fallbackCopy(text, button);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopy(text, button);
+            }
+        }
+        
+        function showCopySuccess(button) {
+            const originalText = button.textContent;
+            button.textContent = '✅ Copied!';
+            button.style.backgroundColor = '#10b981';
+            
+            setTimeout(function() {
+                button.textContent = originalText;
+                button.style.backgroundColor = '';
+            }, 2000);
+        }
+        
+        function fallbackCopy(text, button) {
+            // Create temporary textarea for fallback copy
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopySuccess(button);
+                } else {
+                    alert('Failed to copy. Please copy the text manually.');
+                }
+            } catch (err) {
+                alert('Failed to copy. Please copy the text manually.');
+            }
+            
+            document.body.removeChild(textarea);
         }
     </script>
 </body>
