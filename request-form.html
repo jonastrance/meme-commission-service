@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Meme - Meme Commission Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <h1 class="logo">🎨 Meme Commission Service</h1>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="request-form.html" class="active">Request a Meme</a></li>
+                <li><a href="social-media-templates.html">Promotion Templates</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Request Your Custom Meme</h1>
+            <p>Fill out the form below to get started</p>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <div class="container">
+            <div class="form-container">
+                
+                <!-- Instructions -->
+                <div class="form-instructions">
+                    <h2>How It Works</h2>
+                    <ol>
+                        <li>Fill out the request form with your meme details</li>
+                        <li>Select your preferred pricing tier</li>
+                        <li>We'll get to work on your custom meme</li>
+                        <li>Receive your meme within the guaranteed timeframe</li>
+                        <li>Request revisions if needed (based on your tier)</li>
+                    </ol>
+                </div>
+
+                <!-- Google Form Embed Option -->
+                <div class="google-form-info">
+                    <h3>📝 Google Form Option</h3>
+                    <p>Prefer to use Google Forms? <a href="https://forms.google.com" target="_blank" class="inline-link">Click here to open our Google Form</a></p>
+                    <p class="note">To embed your own Google Form: Create a form at <a href="https://forms.google.com" target="_blank">forms.google.com</a>, click "Send", select the embed option (&lt;/&gt;), and paste the iframe code below.</p>
+                </div>
+
+                <!-- Custom Request Form -->
+                <form class="request-form" id="memeRequestForm">
+                    <h3>Request Form</h3>
+                    
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tier">Pricing Tier *</label>
+                        <select id="tier" name="tier" required>
+                            <option value="">Select a tier...</option>
+                            <option value="basic">Basic Meme - $5</option>
+                            <option value="premium">Premium Meme - $15</option>
+                            <option value="deluxe">Deluxe Package - $25</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="memeType">Meme Type/Template *</label>
+                        <input type="text" id="memeType" name="memeType" placeholder="e.g., Distracted Boyfriend, Drake Hotline Bling, or custom" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="context">Inside Joke / Context *</label>
+                        <textarea id="context" name="context" rows="4" placeholder="Explain your inside joke, company culture, or the context we need to understand" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="memeText">Meme Text / Caption *</label>
+                        <textarea id="memeText" name="memeText" rows="4" placeholder="What text should appear on the meme? Be specific about top text, bottom text, or panel-specific text." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additionalDetails">Additional Details or Special Requirements</label>
+                        <textarea id="additionalDetails" name="additionalDetails" rows="3" placeholder="Any other details we should know? Specific colors, fonts, deadline preferences, etc."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reference">Reference Images (URLs)</label>
+                        <input type="text" id="reference" name="reference" placeholder="Paste URLs to reference images, separated by commas">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">Preferred Delivery Date</label>
+                        <input type="date" id="deadline" name="deadline">
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" name="terms" required>
+                            I agree that the meme will be created according to the selected tier specifications *
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-button">Submit Request</button>
+                    <p class="form-note">* Required fields</p>
+                </form>
+
+                <div class="form-success" id="successMessage" style="display: none;">
+                    <h3>✅ Request Submitted!</h3>
+                    <p>Thank you for your meme commission request. We'll get back to you shortly via email with payment details and next steps.</p>
+                    <button onclick="document.getElementById('successMessage').style.display='none'; document.getElementById('memeRequestForm').reset();" class="cta-button">Submit Another Request</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Meme Commission Service. All rights reserved.</p>
+            <p>Create custom memes based on clients' inside jokes, companies, or weird requirements for $5-25 per meme.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('memeRequestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real implementation, you would send this data to a backend service
+            // For now, we'll just show the success message
+            
+            document.getElementById('memeRequestForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
